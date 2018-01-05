@@ -16,13 +16,11 @@
     "lodash": "~2.4.1",
     "minify": "~0.5.1",
     "moment": "~2.6.0",
-    "restify": "~2.7.0",
+    "restify": "~4.3.0",
     "when": "~3.1.0",
     "request": "~2.40.0",
     "nodemailer": "*"
   },
-  "devDependencies": {
-  },
-  "scripts": {
-  }
+  "devDependencies": {},
+  "scripts": {}
 }
