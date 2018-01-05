@@ -70,8 +70,6 @@ function init3JS() {
 
 function createHelperGrids(geometry1, geometry2)
 {
-	
-
 	helperTerrainGrid1 = new THREE.Mesh(
 		geometry1, 
 		new THREE.MeshBasicMaterial({ 
@@ -98,7 +96,6 @@ function createHelperGrids(geometry1, geometry2)
 
 function createBorings(extent, width, height, minz)
 {
-	console.log(extent);
 	for(var i=0; i < sceneBorings.length; i++)
 	{
     	scene.remove(sceneBorings[i]);
@@ -133,9 +130,8 @@ function drawCylinder(vstart, depth, color, rad){
       var pipemesh = new THREE.Mesh(cylinder,material);
       pipemesh.position.set( vstart.x, vstart.z - (depth / 2) + 1, vstart.y);
       return pipemesh;
-    }
-
-
+}
+	
 function addBoring(x, y, sEle, eEle)
 {
 	var v1 = new THREE.Vector3( x, y, sEle - minZ );
