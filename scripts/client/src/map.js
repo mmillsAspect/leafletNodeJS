@@ -2,49 +2,35 @@
 var layer;
 var map;
 var layerLabels;
-var serviceLayers;
-var services = [];
+var samplePoints;
 
 function loadMap()
 {
 	map = L.map('map2D').setView([45.528, -122.680], 13);
     setBasemap("Topographic");
     var basemaps = document.getElementById('basemapsDDL');
+    var threeControl = $("#threeControl");
     basemaps.addEventListener('change', function(){
         setBasemap(basemaps.value);
     });
-}
-
-function loadServices()
-{
-	services = [];
-	L.esri.dynamicMapLayer({ url: 'http://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer', opacity: 0.9 }).addTo(map);
-	
-	var parcels = L.esri.featureLayer({
-        url: "http://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer/0",
-        style: function () {
-          return { color: "#70ca49", weight: 2 };
+    map.on('zoomend', function() {
+        if(map.getZoom() > 15)
+        {
+            threeControl.prop('disabled', false);
         }
-    }).addTo(map);
-
-	var parcelTemplate = "<h3>{MAJOR}</h3>{MINOR} Acres<br>{PIN}";
-
-	parcels.bindPopup(function(e){
-        return L.Util.template(parcelTemplate, e.feature.properties)
-      });
-	services.push(parcels);
+        else
+        {            
+            threeControl.prop('disabled', true);
+        }
+    });
 }
-
 
 function setBasemap(basemap) {
     if (layer) {
       map.removeLayer(layer);
     }
     layer = L.esri.basemapLayer(basemap);
-	
     map.addLayer(layer);
-	
-	
     if (layerLabels) {
       map.removeLayer(layerLabels);
     }
@@ -53,13 +39,12 @@ function setBasemap(basemap) {
       layerLabels = L.esri.basemapLayer(basemap + 'Labels');
       map.addLayer(layerLabels);
     }
-	
-	for(var i=0; i < services.length; i++)
-	{		
-      map.removeLayer(services[i]);
-	}
-	loadServices();
+    samplePoints = L.esri.featureLayer('http://gismaps.kingcounty.gov/arcgis/rest/services/WLRD/gw_wells/MapServer/0');
+    map.addLayer(samplePoints);
 
+    samplePoints.bindPopup(function (feature) {
+        return L.Util.template('<p>Location: {LOC_NAME}<br>Source Type: {SRC_TYPE}<br>Well Depth: {WELL_DEPTH}</p>', feature.properties);
+    });
     if(scene)
     {
         var extent = map.getBounds();
