@@ -40,10 +40,8 @@ function setBasemap(basemap) {
       map.addLayer(layerLabels);
     }
 
-    //samplePoints = L.esri.featureLayer('http://gismaps.kingcounty.gov/arcgis/rest/services/WLRD/gw_wells/MapServer/0');
-	
 	samplePoints = L.esri.Cluster.featureLayer({
-		url: 'http://gismaps.kingcounty.gov/arcgis/rest/services/WLRD/gw_wells/MapServer/0'
+		url: 'https://gismaps.kingcounty.gov/arcgis/rest/services/WLRD/gw_wells/MapServer/0'
 	});
     map.addLayer(samplePoints);
 
