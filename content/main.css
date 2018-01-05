@@ -12,6 +12,7 @@ html, body,  #map2D, #map3D {
         top:10px;
         z-index: 1000;
       }
+	  
       .mapControl {        
         background-color: white;
         width: 50px;
@@ -20,7 +21,17 @@ html, body,  #map2D, #map3D {
         cursor: pointer;
         box-shadow: 2px 2px 2px #888888;
       }
-
+	
+		#logo
+		{
+        position: absolute;
+        left: 10px;
+		height: 60px; 
+		border: solid 5px white;
+        top:10px;
+        z-index: 1000;
+      }
+		
       .active {        
         background-color: #44bb55;
       }

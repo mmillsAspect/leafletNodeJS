@@ -2,6 +2,8 @@
 var layer;
 var map;
 var layerLabels;
+var serviceLayers;
+var services = [];
 
 function loadMap()
 {
@@ -13,12 +15,36 @@ function loadMap()
     });
 }
 
+function loadServices()
+{
+	services = [];
+	L.esri.dynamicMapLayer({ url: 'http://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer', opacity: 0.9 }).addTo(map);
+	
+	var parcels = L.esri.featureLayer({
+        url: "http://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer/0",
+        style: function () {
+          return { color: "#70ca49", weight: 2 };
+        }
+    }).addTo(map);
+
+	var parcelTemplate = "<h3>{MAJOR}</h3>{MINOR} Acres<br>{PIN}";
+
+	parcels.bindPopup(function(e){
+        return L.Util.template(parcelTemplate, e.feature.properties)
+      });
+	services.push(parcels);
+}
+
+
 function setBasemap(basemap) {
     if (layer) {
       map.removeLayer(layer);
     }
     layer = L.esri.basemapLayer(basemap);
+	
     map.addLayer(layer);
+	
+	
     if (layerLabels) {
       map.removeLayer(layerLabels);
     }
@@ -27,6 +53,12 @@ function setBasemap(basemap) {
       layerLabels = L.esri.basemapLayer(basemap + 'Labels');
       map.addLayer(layerLabels);
     }
+	
+	for(var i=0; i < services.length; i++)
+	{		
+      map.removeLayer(services[i]);
+	}
+	loadServices();
 
     if(scene)
     {

@@ -43,9 +43,6 @@ exports.loadsite = function (request, response, next)
   	var uri = url.parse(request.url).pathname
     , filename = path.join(process.cwd(), uri);
 
-    console.log(request);
-    console.log(response);
-
   if(request.url.toLowerCase().indexOf("/controllers/") > -1)
 	filename = "";
   if(request.url.toLowerCase().indexOf("/appServer/") > -1)
@@ -62,8 +59,7 @@ exports.loadsite = function (request, response, next)
     }
 
     if (fs.statSync(filename).isDirectory()) filename += '/index.html';
-
-	console.log(filename);
+	
 	fs.readFile(filename, "binary", function(err, file) {
 		if(err) {        
 			response.writeHead(500, {"Content-Type": "text/plain"});
@@ -88,7 +84,7 @@ exports.loadsite = function (request, response, next)
 			//nada
 			break;
 		}
-		console.log(responseType);
+		
 		responseType !== "" ? response.writeHead(200, {"Content-Type": responseType}) : false;
 		response.write(file, "binary");
 		response.end();
