@@ -118,7 +118,8 @@ function createBorings(extent, width, height, minz)
 			yAdj= (((( (extent._northEast.lat - yVal) / (extent._northEast.lat - extent._southWest.lat))) * height) - (height/2));
 			console.log("AdjustedX: ", xAdj);
 			console.log("AdjustedY: ", yAdj);
-			addBoring(xAdj, yAdj, layer.feature.properties.SURF_ELEV, layer.feature.properties.WELL_DEPTH);
+			//addBoring(xAdj, yAdj, layer.feature.properties.SURF_ELEV, layer.feature.properties.WELL_DEPTH);
+			addBoring(xAdj, yAdj, 0, layer.feature.properties.WELL_DEPTH);
 		}
 	});	
 }

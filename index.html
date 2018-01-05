@@ -3,19 +3,26 @@
   <head>
      <!-- Load Leaflet from CDN-->
     <link rel="stylesheet" href="./scripts/client/lib/leaflet/leaflet.css" />
-    <script src="./scripts/client/lib/leaflet/leaflet.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
     <script src='./bower_components/jquery/dist/jquery.js'></script>
     <script src='./scripts/client/src/pageloader.js'></script>
     <script src='./scripts/client/src/map.js'></script>
     <script src='./scripts/client/src/terrain.js'></script>
     <!-- Load Esri Leaflet from CDN -->
-    <script src="./scripts/client/lib/esrileaflet/esrileaflet.min.js"></script>
+    <script src="https://unpkg.com/esri-leaflet@2.1.0/dist/esri-leaflet.js"></script>
         <script src='./scripts/client/lib/three.js/three.min.js'></script>
         <script src='./scripts/client/lib/three/OrbitControls.js'></script>
         <script src='./scripts/client/lib/three/stats.min.js'></script>
         <script src='./scripts/client/lib/three/Detector.js'></script>
         <script src='./scripts/client/lib/three/Projector.js'></script>
+		<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.css">
+  <script src="https://unpkg.com/leaflet.markercluster@1.0.4/dist/leaflet.markercluster.js"></script>
+
+  <!-- Load Esri Leaflet Cluster from CDN -->
+  <script src="https://unpkg.com/esri-leaflet-cluster@2.0.0/dist/esri-leaflet-cluster.js"></script>
     <link rel="stylesheet" type='text/css' href="./content/main.css">
+	
   </head>
   <body>
     <div id="basemaps-wrapper" class="leaflet-bar">

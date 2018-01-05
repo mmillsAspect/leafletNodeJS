@@ -6,7 +6,7 @@ var samplePoints;
 
 function loadMap()
 {
-	map = L.map('map2D').setView([45.528, -122.680], 13);
+	map = L.map('map2D').setView([47.428, -121.780], 10);
     setBasemap("Topographic");
     var basemaps = document.getElementById('basemapsDDL');
     var threeControl = $("#threeControl");
@@ -16,11 +16,11 @@ function loadMap()
     map.on('zoomend', function() {
         if(map.getZoom() > 15)
         {
-            threeControl.prop('disabled', false);
+            threeControl.prop('enabled', false);
         }
         else
         {            
-            threeControl.prop('disabled', true);
+            threeControl.prop('enabled', true);
         }
     });
 }
@@ -39,11 +39,16 @@ function setBasemap(basemap) {
       layerLabels = L.esri.basemapLayer(basemap + 'Labels');
       map.addLayer(layerLabels);
     }
-    samplePoints = L.esri.featureLayer('http://gismaps.kingcounty.gov/arcgis/rest/services/WLRD/gw_wells/MapServer/0');
+
+    //samplePoints = L.esri.featureLayer('http://gismaps.kingcounty.gov/arcgis/rest/services/WLRD/gw_wells/MapServer/0');
+	
+	samplePoints = L.esri.Cluster.featureLayer({
+		url: 'http://gismaps.kingcounty.gov/arcgis/rest/services/WLRD/gw_wells/MapServer/0'
+	});
     map.addLayer(samplePoints);
 
-    samplePoints.bindPopup(function (feature) {
-        return L.Util.template('<p>Location: {LOC_NAME}<br>Source Type: {SRC_TYPE}<br>Well Depth: {WELL_DEPTH}</p>', feature.properties);
+    samplePoints.bindPopup(function (item) {
+        return L.Util.template('<p>Location: {LOC_NAME}<br>Source Type: {SRC_TYPE}<br>Well Depth: {WELL_DEPTH}</p>', item.feature.properties);
     });
     if(scene)
     {
