@@ -1,8 +1,8 @@
 {
-  "name": "esrileaflet3JS",
+  "name": "leafletNodeJS",
   "version": "0.1.0",
   "author": "Mike Mills",
-  "description": "esrileaflet3JS",
+  "description": "leafletNodeJS",
   "dependencies": {
     "aws-sdk": "~2.0.0-rc.14",
     "base64-js": "0.0.6",
