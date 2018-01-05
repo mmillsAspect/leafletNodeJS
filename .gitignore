@@ -7,6 +7,4 @@ Desktop.ini
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
-
-bower_components
 node_modules
