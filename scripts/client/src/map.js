@@ -13,14 +13,16 @@ function loadMap()
     basemaps.addEventListener('change', function(){
         setBasemap(basemaps.value);
     });
+	threeControl.prop('disabled', true);
     map.on('zoomend', function() {
-        if(map.getZoom() > 15)
+		console.log("map.getZoom()", map.getZoom());
+        if(map.getZoom() > 14)
         {
-            threeControl.prop('enabled', false);
+            threeControl.prop('disabled', false);
         }
         else
         {            
-            threeControl.prop('enabled', true);
+            threeControl.prop('disabled', true);
         }
     });
 }
