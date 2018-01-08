@@ -3,6 +3,8 @@ var layer;
 var map;
 var layerLabels;
 var samplePoints;
+var parcelLots;
+var featureCollection;
 
 function loadMap()
 {
@@ -23,12 +25,53 @@ function loadMap()
             threeControl.prop('enabled', true);
         }
     });
+	addControls();
+}
+
+function addControls()
+{
+	var drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
+
+    // Initialise the draw control and pass it the FeatureGroup of editable layers
+    var drawControl = new L.Control.Draw({
+        draw: {			
+            point: false,
+            line: false,
+            polygon: false,
+            marker: false,
+			circle: false
+        },
+        edit: {
+            featureGroup: drawnItems
+        }
+    });
+    map.addControl(drawControl);
+
+    map.on('draw:created', function (e) {
+        var layer = e.layer;
+        var geoJson = layer.toGeoJSON()		
+		var query = new L.esri.query({
+			url: "http://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer/0/"
+		});
+		query.intersects(layer);
+		query.run(function(error, result, response){
+			if(featureCollection)
+			{
+				map.removeLayer(featureCollection);				
+			}
+			featureCollection = L.geoJson(result);
+			featureCollection.bindPopup(function (item) {
+				return L.Util.template('<p>OBJECTID: {OBJECTID}<br>MAJOR: {MAJOR}<br>MINOR: {MINOR}</p><br>PIN: {PIN}</p>', item.feature.properties);
+			});
+			
+			map.addLayer(featureCollection);
+		});		
+    });
 }
 
 function setBasemap(basemap) {
-    if (layer) {
-      map.removeLayer(layer);
-    }
+    
     layer = L.esri.basemapLayer(basemap);
     map.addLayer(layer);
     if (layerLabels) {
@@ -39,7 +82,7 @@ function setBasemap(basemap) {
       layerLabels = L.esri.basemapLayer(basemap + 'Labels');
       map.addLayer(layerLabels);
     }
-
+	/*
 	samplePoints = L.esri.Cluster.featureLayer({
 		url: 'https://gismaps.kingcounty.gov/arcgis/rest/services/WLRD/gw_wells/MapServer/0'
 	});
@@ -56,6 +99,7 @@ function setBasemap(basemap) {
         var mapurl = layer._url.toString().replace("/tile/{z}/{y}/{x}", "").replace("{s}", "services");
         createTerrain(width, height, extent, mapurl);
     }
+	*/
 }
 
   

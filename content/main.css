@@ -57,3 +57,5 @@ html, body,  #map2D, #map3D {
       #basemaps {
         margin-bottom: 5px;
       }
+
+.leaflet-draw-toolbar a {    background-image: url('spritesheet.png');}

@@ -38,7 +38,7 @@ exports.sendEmail = function (request, response, next)
 
 exports.loadsite = function (request, response, next)
 {
-	console.log('Called Load Site');
+	//console.log('Called Load Site');
 
   	var uri = url.parse(request.url).pathname
     , filename = path.join(process.cwd(), uri);
