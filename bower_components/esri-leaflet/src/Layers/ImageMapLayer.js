@@ -1,24 +1,31 @@
-EsriLeaflet.Layers.ImageMapLayer = EsriLeaflet.Layers.RasterLayer.extend({
+import { Util } from 'leaflet';
+import { RasterLayer } from './RasterLayer';
+import { getUrlParams } from '../Util';
+import imageService from '../Services/ImageService';
+
+export var ImageMapLayer = RasterLayer.extend({
 
   options: {
     updateInterval: 150,
-    format: 'jpgpng'
+    format: 'jpgpng',
+    transparent: true,
+    f: 'image'
   },
 
-  query: function(){
-    return this._service.query();
+  query: function () {
+    return this.service.query();
   },
 
-  identify: function(){
-    return this._service.identify();
+  identify: function () {
+    return this.service.identify();
   },
 
-  initialize: function (url, options) {
-    options = options || {};
-    options.url = EsriLeaflet.Util.cleanUrl(url);
-    this._service = new EsriLeaflet.Services.ImageService(options);
-    this._service.on('authenticationrequired requeststart requestend requesterror requestsuccess', this._propagateEvent, this);
-    L.Util.setOptions(this, options);
+  initialize: function (options) {
+    options = getUrlParams(options);
+    this.service = imageService(options);
+    this.service.addEventParent(this);
+
+    Util.setOptions(this, options);
   },
 
   setPixelType: function (pixelType) {
@@ -32,7 +39,7 @@ EsriLeaflet.Layers.ImageMapLayer = EsriLeaflet.Layers.RasterLayer.extend({
   },
 
   setBandIds: function (bandIds) {
-    if (L.Util.isArray(bandIds)) {
+    if (Util.isArray(bandIds)) {
       this.options.bandIds = bandIds.join(',');
     } else {
       this.options.bandIds = bandIds.toString();
@@ -46,7 +53,7 @@ EsriLeaflet.Layers.ImageMapLayer = EsriLeaflet.Layers.RasterLayer.extend({
   },
 
   setNoData: function (noData, noDataInterpretation) {
-    if (L.Util.isArray(noData)) {
+    if (Util.isArray(noData)) {
       this.options.noData = noData.join(',');
     } else {
       this.options.noData = noData.toString();
@@ -66,27 +73,28 @@ EsriLeaflet.Layers.ImageMapLayer = EsriLeaflet.Layers.RasterLayer.extend({
     return this.options.noDataInterpretation;
   },
 
-  setRenderingRule: function(renderingRule) {
+  setRenderingRule: function (renderingRule) {
     this.options.renderingRule = renderingRule;
     this._update();
   },
 
-  getRenderingRule: function() {
+  getRenderingRule: function () {
     return this.options.renderingRule;
   },
 
-  setMosaicRule: function(mosaicRule) {
+  setMosaicRule: function (mosaicRule) {
     this.options.mosaicRule = mosaicRule;
     this._update();
   },
 
-  getMosaicRule: function() {
+  getMosaicRule: function () {
     return this.options.mosaicRule;
   },
 
-  _getPopupData: function(e){
-    var callback = L.Util.bind(function(error, results, response) {
-      setTimeout(L.Util.bind(function(){
+  _getPopupData: function (e) {
+    var callback = Util.bind(function (error, results, response) {
+      if (error) { return; } // we really can't do anything here but authenticate or requesterror will fire
+      setTimeout(Util.bind(function () {
         this._renderPopup(e.latlng, error, results, response);
       }, this), 300);
     }, this);
@@ -113,17 +121,15 @@ EsriLeaflet.Layers.ImageMapLayer = EsriLeaflet.Layers.RasterLayer.extend({
   },
 
   _buildExportParams: function () {
-    var bounds = this._map.getBounds();
-    var size = this._map.getSize();
-    var ne = this._map.options.crs.project(bounds._northEast);
-    var sw = this._map.options.crs.project(bounds._southWest);
+    var sr = parseInt(this._map.options.crs.code.split(':')[1], 10);
 
     var params = {
-      bbox: [sw.x, sw.y, ne.x, ne.y].join(','),
-      size: size.x + ',' + size.y,
+      bbox: this._calculateBbox(),
+      size: this._calculateImageSize(),
       format: this.options.format,
-      bboxSR: this.options.bboxSR,
-      imageSR: this.options.imageSR
+      transparent: this.options.transparent,
+      bboxSR: sr,
+      imageSR: sr
     };
 
     if (this.options.from && this.options.to) {
@@ -146,7 +152,8 @@ EsriLeaflet.Layers.ImageMapLayer = EsriLeaflet.Layers.RasterLayer.extend({
       params.bandIds = this.options.bandIds;
     }
 
-    if (this.options.noData) {
+    // 0 is falsy *and* a valid input parameter
+    if (this.options.noData === 0 || this.options.noData) {
       params.noData = this.options.noData;
     }
 
@@ -154,15 +161,15 @@ EsriLeaflet.Layers.ImageMapLayer = EsriLeaflet.Layers.RasterLayer.extend({
       params.noDataInterpretation = this.options.noDataInterpretation;
     }
 
-    if (this._service.options.token) {
-      params.token = this._service.options.token;
+    if (this.service.options.token) {
+      params.token = this.service.options.token;
     }
 
-    if(this.options.renderingRule) {
+    if (this.options.renderingRule) {
       params.renderingRule = JSON.stringify(this.options.renderingRule);
     }
 
-    if(this.options.mosaicRule) {
+    if (this.options.mosaicRule) {
       params.mosaicRule = JSON.stringify(this.options.mosaicRule);
     }
 
@@ -171,22 +178,22 @@ EsriLeaflet.Layers.ImageMapLayer = EsriLeaflet.Layers.RasterLayer.extend({
 
   _requestExport: function (params, bounds) {
     if (this.options.f === 'json') {
-      this._service.get('exportImage', params, function(error, response){
+      this.service.request('exportImage', params, function (error, response) {
+        if (error) { return; } // we really can't do anything here but authenticate or requesterror will fire
+        if (this.options.token) {
+          response.href += ('?token=' + this.options.token);
+        }
         this._renderImage(response.href, bounds);
       }, this);
     } else {
       params.f = 'image';
-      this._renderImage(this.options.url + 'exportImage' + L.Util.getParamString(params), bounds);
+      this._renderImage(this.options.url + 'exportImage' + Util.getParamString(params), bounds);
     }
   }
 });
 
-EsriLeaflet.ImageMapLayer = EsriLeaflet.Layers.ImageMapLayer;
+export function imageMapLayer (url, options) {
+  return new ImageMapLayer(url, options);
+}
 
-EsriLeaflet.Layers.imageMapLayer = function (url, options) {
-  return new EsriLeaflet.Layers.ImageMapLayer(url, options);
-};
-
-EsriLeaflet.imageMapLayer = function (url, options) {
-  return new EsriLeaflet.Layers.ImageMapLayer(url, options);
-};
+export default imageMapLayer;
