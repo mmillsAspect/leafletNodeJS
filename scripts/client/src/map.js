@@ -11,20 +11,22 @@ function loadMap()
 	map = L.map('map2D').setView([47.428, -121.780], 10);
     setBasemap("Topographic");
     var basemaps = document.getElementById('basemapsDDL');
-    var threeControl = $("#threeControl");
+    //var threeControl = $("#threeControl");
+	$("#threeControl").hide();
+	$("#twoControl").hide();
     basemaps.addEventListener('change', function(){
         setBasemap(basemaps.value);
     });
-    map.on('zoomend', function() {
-        if(map.getZoom() > 15)
-        {
-            threeControl.prop('enabled', false);
-        }
-        else
-        {            
-            threeControl.prop('enabled', true);
-        }
-    });
+    //map.on('zoomend', function() {
+    //    if(map.getZoom() > 15)
+    //    {
+    //        threeControl.prop('enabled', false);
+    //    }
+    //    else
+    //    {            
+    //        threeControl.prop('enabled', true);
+    //    }
+    //});
 	addControls();
 }
 

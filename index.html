@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="./bower_components/leaflet.draw/dist/leaflet.draw.css"/>
 	<script src="./bower_components/leaflet.draw/dist/leaflet.draw.js"></script>
     <script src='./bower_components/jquery/dist/jquery.js'></script>
+    <script src='./bower_components/jquery-ui/jquery-ui.js'></script>
     <script src='./scripts/client/src/pageloader.js'></script>
     <script src='./scripts/client/src/map.js'></script>
     <script src='./scripts/client/src/terrain.js'></script>
@@ -39,11 +40,13 @@
         <option value="ShadedRelief">Shaded Relief<options>
       </select>
     </div>
-    <div id="map2D"></div>
+	<img src="./content/images/aspect_logo.png" id='logo'>	
+    <div id="map2D"></div>	
     <div id="map3D"></div>	
-	<!--<img src="./content/images/aspect_logo.png" id="logo">-->
+	
     <div id="visButtons"><button class='mapControl active' id='twoControl' type='button' onclick='changeView("twoControl")'>2D</button><button class='mapControl'  id='threeControl' type='button' onclick='changeView("threeControl")'>3D</button></div>
-    <script>
+    
+	<script>
         loadPage();
     </script>
   </body>

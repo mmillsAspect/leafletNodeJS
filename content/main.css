@@ -25,12 +25,14 @@ html, body,  #map2D, #map3D {
 		#logo
 		{
         position: absolute;
-        left: 10px;
+        right: 10px;
 		height: 60px; 
 		border: solid 5px white;
         top:10px;
         z-index: 1000;
       }
+
+	
 		
       .active {        
         background-color: #44bb55;
