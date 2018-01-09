@@ -1,10 +1,10 @@
 {
-  "name": "esrileaflet",
+  "name": "leafletNodeJS",
   "version": "0.0.0",
   "authors": [
-    "Mike Mills <mmills@geoengineers.com>"
+    "Mike Mills <mmills@aspectconsulting.com>"
   ],
-  "description": "Spike ESRI 3JS",
+  "description": "ESRI 3JS",
   "license": "MIT",
   "private": true,
   "dependencies": {
