@@ -27,7 +27,7 @@ function loadMap()
     //        threeControl.prop('enabled', true);
     //    }
     //});
-	addControls();
+	addControls();   
 }
 
 function addControls()
@@ -45,11 +45,18 @@ function addControls()
 			circle: false
         },
         edit: {
-            featureGroup: drawnItems
+            featureGroup: drawnItems,
+            remove: true
+        },
+        delete: {
+            featureGroup: drawnItems,
+            remove: true
         }
     });
     map.addControl(drawControl);
-
+	
+	$(".leaflet-draw-edit-edit").css("display", "none");
+	$(".leaflet-draw-edit-remove").css("display", "none");
     map.on('draw:created', function (e) {
         var layer = e.layer;
         var geoJson = layer.toGeoJSON()		

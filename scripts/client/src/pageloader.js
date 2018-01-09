@@ -2,9 +2,11 @@
 var layer;
 function loadPage()
 {
-      loadMap();
-      $('#map3D').css('display', 'none');
-
+    loadMap();
+    $('#map3D').css('display', 'none');
+	$('#exampleModal').modal();                      // initialized with defaults
+	$('#exampleModal').modal({ keyboard: false });   // initialized with no keyboard
+	$('#exampleModal').modal('show'); 
 }
 function  changeView(target){
         $('#twoControl').removeClass('active');

@@ -8,6 +8,8 @@
 	<script src="./bower_components/leaflet.draw/dist/leaflet.draw.js"></script>
     <script src='./bower_components/jquery/dist/jquery.js'></script>
     <script src='./bower_components/jquery-ui/jquery-ui.js'></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css" />
     <script src='./scripts/client/src/pageloader.js'></script>
     <script src='./scripts/client/src/map.js'></script>
     <script src='./scripts/client/src/terrain.js'></script>
@@ -44,8 +46,26 @@
     <div id="map2D"></div>	
     <div id="map3D"></div>	
 	
-    <div id="visButtons"><button class='mapControl active' id='twoControl' type='button' onclick='changeView("twoControl")'>2D</button><button class='mapControl'  id='threeControl' type='button' onclick='changeView("threeControl")'>3D</button></div>
-    
+    <div id="visButtons"><button class='mapControl active' id='twoControl' type='button' onclick='changeView("twoControl")'>2D</button><button class='mapControl'  id='threeControl' type='button' onclick='changeView("threeControl")'>3D</button></div>  
+	<div id="infoButtons"><button class='mapControl' id='infoControl' type='button' onclick="$('#exampleModal').modal('show')" style='font-size: 12pt'>Info</button></div>
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">King County - Tax Lot Select</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please use the tools on the left side of the map to draw shapes. If these shapes intersect a tax lot, the tax lot will be drawn and clicking on the lot will show you more information. 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 	<script>
         loadPage();
     </script>
