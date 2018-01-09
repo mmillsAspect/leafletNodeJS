@@ -61,7 +61,7 @@ function addControls()
         var layer = e.layer;
         var geoJson = layer.toGeoJSON()		
 		var query = new L.esri.query({
-			url: "http://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer/0/"
+			url: "https://gismaps.kingcounty.gov/arcgis/rest/services/Property/KingCo_Parcels/MapServer/0/"
 		});
 		query.intersects(layer);
 		query.run(function(error, result, response){
