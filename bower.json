@@ -12,6 +12,7 @@
     "esri-leaflet": "*",
     "jquery": "~2.2.4",
 	"leaflet.draw": "*",
+	"Leaflet.label": "*",
 	"jquery-ui": "*",
 	"bootstrap": "*"
   }

@@ -71,3 +71,9 @@ float: left;
       #basemaps {
         margin-bottom: 5px;
       }
+
+.leaflet-tooltip.my-labels {
+  background-color: transparent;
+  border: transparent;
+  box-shadow: none;
+  }

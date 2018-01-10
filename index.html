@@ -20,6 +20,10 @@
         <script src='./scripts/client/lib/three/stats.min.js'></script>
         <script src='./scripts/client/lib/three/Detector.js'></script>
         <script src='./scripts/client/lib/three/Projector.js'></script>
+    <script src='./scripts/client/src/locations.json'></script>
+    <script src='./scripts/client/src/analytes.json'></script>
+    <script src='./scripts/client/src/results.json'></script>
+
 		<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.Default.css">
   <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.css">
   <script src="https://unpkg.com/leaflet.markercluster@1.0.4/dist/leaflet.markercluster.js"></script>
@@ -30,7 +34,7 @@
 	
   </head>
   <body>
-	<img src="./content/images/aspect_logo.png" id='logo'>		
+<img src="./content/images/aspect_logo.png" id='logo'>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -41,6 +45,7 @@
         <p>Please select one of the demos below. </p>
 		<p><a href='wells'>Well Locations in 2D and 3D</a></p>
 		<p><a href='taxlots'>Tax lot selection with shape intersects</a></p>
+		<p><a href='waterquality'>Locations with water quality data</a></p>
       </div>
       <div class="modal-footer">
       </div>
