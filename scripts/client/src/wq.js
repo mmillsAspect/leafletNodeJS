@@ -121,7 +121,7 @@ var layout = {
     }
   },
   yaxis: {
-    title: selectedAnalyte + " (" + unit + ")",
+    title: "(" + unit + ")",
     titlefont: {
       size: 12,
       color: '#333333'
