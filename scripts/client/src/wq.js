@@ -88,10 +88,12 @@ function buildPlot(){
 	var selectedAnalyte = $("#analyteDDL").val();
 	var xvals = [];
 	var yvals = [];
+	var unit = "";
 	for(var i=0; i < sampleResults.length; i++)
 	{
 		if(sampleResults[i].c === selectedAnalyte)
 		{
+			unit = sampleResults[i].u;
 			console.log("Date", sampleResults[i].d.split(" ")[0].split("/")[2] + "-" + sampleResults[i].d.split(" ")[0].split("/")[0] + "-" + sampleResults[i].d.split(" ")[0].split("/")[1]);
 			yvals.push(sampleResults[i].r);
 			xvals.push(sampleResults[i].d.split(" ")[0].split("/")[2] + "-" + sampleResults[i].d.split(" ")[0].split("/")[0] + "-" + sampleResults[i].d.split(" ")[0].split("/")[1]);			
@@ -106,9 +108,15 @@ function buildPlot(){
 	};
 
 	var data = [ trace3 ];
-
+	
 	var layout = {
-	  title:  sampleSelected + " - " + selectedAnalyte
+	  title:  sampleSelected + " - " + selectedAnalyte,
+	  xaxis=dict(
+        title='Date',
+		),
+		yaxis=dict(
+			title= selectedAnalyte + "(" + unit + ")"
+		)
 	};
 
 	Plotly.newPlot('plotDiv', data, layout);
