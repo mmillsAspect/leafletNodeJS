@@ -104,20 +104,31 @@ function buildPlot(){
 	  x: xvals,
 	  y: yvals,
 	  mode: 'lines+markers',
-	  name: 'Scatter + Lines'
+	  name: unit
 	};
 
 	var data = [ trace3 ];
 	
-	var layout = {
-	  title:  sampleSelected + " - " + selectedAnalyte,
-	  xaxis=dict(
-        title='Date',
-		),
-		yaxis=dict(
-			title= selectedAnalyte + "(" + unit + ")"
-		)
-	};
+	
+
+var layout = {
+  title: sampleSelected + " - " + selectedAnalyte,
+  xaxis: {
+    title: 'xDate',
+    titlefont: {
+      size: 12,
+      color: '#333333'
+    }
+  },
+  yaxis: {
+    title: selectedAnalyte + "(" + unit + ")",
+    titlefont: {
+      size: 12,
+      color: '#333333'
+    }
+  }
+};
+
 
 	Plotly.newPlot('plotDiv', data, layout);
 }
