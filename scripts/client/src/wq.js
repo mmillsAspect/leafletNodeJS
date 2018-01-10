@@ -65,7 +65,7 @@ function buildAnalytesList(newResults)
 	var analyteHtml = "<h5>Select Parameter: &nbsp;<select id='analyteDDL' onchange='buildPlot()'>";
 	for(var j=0; j< analyteList.length; j++)
 	{ 
-		analyteHtml = analyteHtml + "<option>" +  analyteList[j] + "</option>";
+		analyteHtml = analyteHtml + "<option>" +  analyteList[j].replace(/"/g, '') + "</option>";
 	}
 	analyteHtml = analyteHtml + "</select></h5>";
 	$("#analytesDiv").html(analyteHtml);
@@ -91,7 +91,7 @@ function buildPlot(){
 	var unit = "";
 	for(var i=0; i < sampleResults.length; i++)
 	{
-		if(sampleResults[i].c === selectedAnalyte)
+		if(sampleResults[i].c.replace(/"/g, '') === selectedAnalyte)
 		{
 			unit = sampleResults[i].u;
 			console.log("Date", sampleResults[i].d.split(" ")[0].split("/")[2] + "-" + sampleResults[i].d.split(" ")[0].split("/")[0] + "-" + sampleResults[i].d.split(" ")[0].split("/")[1]);
@@ -114,14 +114,14 @@ function buildPlot(){
 var layout = {
   title: sampleSelected + " - " + selectedAnalyte,
   xaxis: {
-    title: 'xDate',
+    title: 'Date',
     titlefont: {
       size: 12,
       color: '#333333'
     }
   },
   yaxis: {
-    title: selectedAnalyte + "(" + unit + ")",
+    title: selectedAnalyte + " (" + unit + ")",
     titlefont: {
       size: 12,
       color: '#333333'
