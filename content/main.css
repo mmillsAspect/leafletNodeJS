@@ -59,6 +59,15 @@ float: left;
         z-index: 1000;
       }
 
+    #addButton{
+        position: absolute;
+        left: 10px;
+        top:85px;
+        z-index: 1000;
+      }
+
+
+
       #basemaps-wrapper {
           position: absolute;
           bottom: 10px;

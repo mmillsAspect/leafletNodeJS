@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <!-- Load Leaflet from CDN-->
+    <link rel="stylesheet" href="./scripts/client/lib/leaflet/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
+    <script src='./bower_components/jquery/dist/jquery.js'></script>
+    <script src='./scripts/client/src/pageloader.js'></script>
+    <script src='./scripts/client/src/edit.js'></script>
+    <script src='./scripts/client/src/terrain.js'></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@2.1.0/dist/esri-leaflet.js"></script>
+        <script src='./scripts/client/lib/three.js/three.min.js'></script>
+        <script src='./scripts/client/lib/three/OrbitControls.js'></script>
+        <script src='./scripts/client/lib/three/stats.min.js'></script>
+        <script src='./scripts/client/lib/three/Detector.js'></script>
+        <script src='./scripts/client/lib/three/Projector.js'></script>
+		<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.css">
+  <script src="https://unpkg.com/leaflet.markercluster@1.0.4/dist/leaflet.markercluster.js"></script>
+
+  <!-- Load Esri Leaflet Cluster from CDN -->
+  <script src="https://unpkg.com/esri-leaflet-cluster@2.0.0/dist/esri-leaflet-cluster.js"></script>
+    <link rel="stylesheet" type='text/css' href="./content/main.css">
+	
+  </head>
+  <body>
+    <div id="basemaps-wrapper" class="leaflet-bar">
+      <select id="basemapsDDL">
+        <option value="Topographic">Topographic<options>
+        <option value="Streets">Streets</option>
+        <option value="NationalGeographic">National Geographic<options>
+        <option value="Oceans">Oceans<options>
+        <option value="Gray">Gray<options>
+        <option value="DarkGray">Dark Gray<options>
+        <option value="Imagery">Imagery<options>
+        <option value="ShadedRelief">Shaded Relief<options>
+      </select>
+    </div>
+    <div id="map2D"></div>
+    <div id="map3D"></div>	
+	<!--<img src="./content/images/aspect_logo.png" id="logo">-->
+    <div id="addButton"><button class='mapControl' type='button' onclick='startEdit()' style='height: 50px;'><span style='float: left'>+ </span><img src='marker-icon.png'/></button></div>
+    <div id="infoButtons"><button class='mapControl' id='infoControl' type='button' onclick="$('#exampleModal').modal('show')" style='font-size: 12pt'>?</button></div>
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h4 class="modal-title" id="exampleModalLabel">Pierce County - Monitoring Wells with Add Feature</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			Click to view the details of each monitoring well and press the "+ Add Well" button to add a well location. After clicking on the button, simply click the map where you want the well to be and fill out the information required and press save. 
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<script>
+        loadPage();
+    </script>
+  </body>
+</html>
