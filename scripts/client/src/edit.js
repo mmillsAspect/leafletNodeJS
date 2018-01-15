@@ -133,7 +133,7 @@ function addFeatureLayer(){
     map.addLayer(mwPoints);
 	
     mwPoints.bindPopup(function (item) {
-        return L.Util.template('<p>Name: {NAME}<br>Basin: {BASIN_GP}<br>Active: {ACTIVE}<br>Hydro Type: {HYDRO_TY}<br>DEPTH: {DEPTH }<br>DATE: {DATE_}<br>LAT: {LAT}<br>LONG: {LONG}<br><br> <a onclick="deleteFeature({OBJECTID})">Delete Well</a> </p>', item.feature.properties);
+        return L.Util.template('<p>Name: {NAME}<br>Basin: {BASIN_GP}<br>Active: {ACTIVE}<br>Hydro Type: {HYDRO_TY}<br>DEPTH: {DEPTH}<br>LAT: {LAT}<br>LONG: {LONG}<br><br> <a onclick="deleteFeature({OBJECTID})">Delete Well</a> </p>', item.feature.properties);
     });
 }
 
