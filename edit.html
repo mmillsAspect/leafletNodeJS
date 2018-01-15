@@ -42,8 +42,8 @@
     <div id="map2D"></div>
     <div id="map3D"></div>	
 	<!--<img src="./content/images/aspect_logo.png" id="logo">-->
-    <div id="addButton"><button class='mapControl' type='button' onclick='startEdit()' style='height: 50px;'><span style='float: left'>+ </span><img src='marker-icon.png'/></button></div>
-    <div id="infoButtons"><button class='mapControl' id='infoControl' type='button' onclick="$('#exampleModal').modal('show')" style='font-size: 12pt'>?</button></div>
+    <div id="addButton"><button class='mapControl' type='button' onclick='startEdit()' style='height: 30px; width: 90px'><span style='float: left'>+ Add Well</span></button></div>
+    <div id="infoButtons"><button class='mapControl' id='infoControl' type='button' onclick="showInfo()" style='font-size: 12pt'>?</button></div>
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 		<div class="modal-content">
@@ -54,10 +54,10 @@
 			</button>
 		  </div>
 		  <div class="modal-body">
-			Click to view the details of each monitoring well and press the "+ Add Well" button to add a well location. After clicking on the button, simply click the map where you want the well to be and fill out the information required and press save. 
+			<div id="plotDiv" style='width: 570px'>Click to view the details of each monitoring well and press the "+ Add Well" button to add a well location. After clicking on the button, simply click the map where you want the well to be and fill out the information required and press save. </div>
 		  </div>
 		  <div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnClose">Close</button><button type="button" class="btn btn-success" onclick='saveEdit()' id="btnSave">Save</button><button type="button" class="btn btn-danger" onclick='cancelEdit()' id="btnCancel">Cancel</button>
 		  </div>
 		</div>
 	  </div>
