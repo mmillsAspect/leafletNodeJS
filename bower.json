@@ -14,6 +14,7 @@
 	"leaflet.draw": "*",
 	"Leaflet.label": "*",
 	"jquery-ui": "*",
-	"bootstrap": "*"
+	"bootstrap": "*",
+	"font-awesome": "*"
   }
 }
