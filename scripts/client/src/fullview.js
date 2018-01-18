@@ -108,7 +108,7 @@ function printMap(layout)
 
 	
 	$.ajax({  
-	   url:'http://sampleserver6.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task/execute',  
+	   url:'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task/execute',  
 	   type:'POST',  
 	   dataType:'json',  
 	   data:({  
