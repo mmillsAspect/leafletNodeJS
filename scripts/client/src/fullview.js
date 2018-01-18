@@ -90,7 +90,7 @@ function printMap(layout)
 	for (var key in layers) {		
 		if(layers[key]._url)
 		{
-			urls.push(layers[key]._url.replace("http://{s}", "https://services").replace("/tile/{z}/{y}/{x}", ""));
+			urls.push(layers[key]._url.replace("http://{s}", "https://services").replace("https://{s}", "https://services").replace("/tile/{z}/{y}/{x}", ""));
 		}
 	}	
 	var operationalLayers = [];
@@ -118,12 +118,17 @@ function printMap(layout)
 		  f:'json'  
 	   }),  
 	   success:function(response){  
-		  window.open(response.results[0].value.url);
 		  $("#ajax_loader").hide();
+		   if(response.error)
+		   {
+			   alert("Print Failed, ESRI!!");
+		   }
+		   else{
+			  window.open(response.results[0].value.url);
+		   }
 	   },  
 	   error:function(xhr, status, error) {  
 		  console.log(error);  
-		  $("#ajax_loader").hide();
 	   }  
 	});  
 	
