@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <!-- Load Leaflet from CDN-->
+    <link rel="stylesheet" href="./scripts/client/lib/leaflet/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"></script>
+    <script src='./bower_components/jquery/dist/jquery.js'></script>
+    <script src='./scripts/client/src/pageloader.js'></script>
+    <script src='./scripts/client/src/controls/toc.js'></script>
+    <script src='./scripts/client/src/fullview.js'></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="./bower_components/Leaflet.NavBar/src/Leaflet.NavBar.js"></script>
+    <link rel="stylesheet" href="./bower_components/Leaflet.NavBar/src/Leaflet.NavBar.css"/>
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.css" />
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@2.1.0/dist/esri-leaflet.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.Default.css">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.css">
+  <script src="https://unpkg.com/leaflet.markercluster@1.0.4/dist/leaflet.markercluster.js"></script>
+
+  <!-- Load Esri Leaflet Cluster from CDN -->
+  <script src="https://unpkg.com/esri-leaflet-cluster@2.0.0/dist/esri-leaflet-cluster.js"></script>
+    <link rel="stylesheet" type='text/css' href="./content/main.css">
+	
+  </head>
+  <body>
+	<div id='ajax_loader' style="position: fixed; left: 0px; top: 0px; bottom: 0px; right: 0px; display: none; z-index:10000; background-color: #0205">
+		<img src="https://www.drupal.org/files/issues/ajax-loader.gif" style="position: fixed; left: 50%; top: 50%; "></img>
+	</div>
+    <div id="map2D"></div>
+	<div id="headerBar"><div id="logoContainer"><img src="./content/images/aspect_logo.png" id="logo"></div><div id="toolsContainer">
+		<ul class="nav navbar-nav">
+		<li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: #000000;"><i class="fa fa-search fa-4" aria-hidden="true" style="color: #559955; margin-right: 4px"></i>Search<span class="caret"></span></a>
+          <ul class="dropdown-menu" ><div class="form-group" style='padding: 8px'>
+			<input type="text" class="form-control" placeholder="Search" style='width: 200px; display: inline;' id="txtSearch" onkeyup="filterWells()"></div>
+          </ul>
+        </li>
+		<li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: #000000;"><i class="fa fa-print fa-4" aria-hidden="true" style="color: #555599; margin-right: 4px"></i>Print<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#" onclick="printMap('landscape')">Landscape</a></li>
+            <li><a href="#" onclick="printMap('portrait')">Portrait</a></li>
+          </ul>
+        </li>
+		</ul>
+	</div></div>
+    <div id="infoButtons"><button class='mapControl' id='infoControl' type='button' onclick="showInfo()" style='font-size: 12pt'><i class="fa fa-info fa-4" aria-hidden="true"></i></button></div>
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h4 class="modal-title" id="modalTitle">King County - Monitoring Wells</h4>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			<div id='modalBody'>Zoom in and out to see clustering of monitoring wells in King County. Zooming in far enough will reveal individual wells which you can click on to see the wells information.</div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal" id='btnClose'>Close</button><button type="button" class="btn btn-primary" id='btnSave' style='display: none'>Save</button><button type="button" class="btn btn-danger" data-dismiss="modal" id='btnCancel'  style='display: none'>Cancel</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<script>
+        loadPage();
+    </script>
+  </body>
+</html>

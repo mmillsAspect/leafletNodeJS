@@ -27,6 +27,8 @@ function loadMap()
     });
 }
 
+	
+
 function setBasemap(basemap) {
     if (layer) {
       map.removeLayer(layer);
