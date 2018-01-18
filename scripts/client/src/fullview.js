@@ -82,6 +82,9 @@ var degrees2meters = function(lon,lat) {
 function printMap(layout)
 {
 	layout = layout === "portrait" ? "Letter ANSI A Portrait" : "Letter ANSI A Landscape";
+	
+	var zoomLevel = zoomLev = map.getZoom();
+	
 	var bounds = map.getBounds();
 	var southWest = degrees2meters(bounds._southWest.lng, bounds._southWest.lat);
 	var northEast = degrees2meters(bounds._northEast.lng, bounds._northEast.lat);		
@@ -101,7 +104,7 @@ function printMap(layout)
 	operationalLayers.push({"id":"gw_wells","title":"gw_wells","url":"https://gismaps.kingcounty.gov/arcgis/rest/services/WLRD/gw_wells/MapServer"});//,"visibleLayers":[0]});
 	
 	$("#ajax_loader").show();
-	var mapJSON = {"mapOptions":{"showAttribution":true,"extent":{"xmin":southWest[0],"ymin":southWest[1],"xmax":northEast[0],"ymax":northEast[1],"spatialReference":{"wkid":102100}},"spatialReference":{"wkid":102100},"scale":577790.554289},
+	var mapJSON = {"mapOptions":{"showAttribution":true,"extent":{"xmin":southWest[0],"ymin":southWest[1],"xmax":northEast[0],"ymax":northEast[1],"spatialReference":{"wkid":102100}},"spatialReference":{"wkid":102100}},
 		"operationalLayers":operationalLayers
 		,"exportOptions":{"outputSize":[800,1100],"dpi":96},
 		"layoutOptions":{"titleText":"Water Monitoring Map Demo","scaleBarOptions":{"metricUnit":"esriKilometers","metricLabel":"km","nonMetricUnit":"esriMiles","nonMetricLabel":"mi"},"legendOptions":{"operationalLayers":[]}}};
