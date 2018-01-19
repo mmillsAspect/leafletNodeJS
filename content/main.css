@@ -19,6 +19,25 @@ border: none;
 outline: none;
 }
 
+#map3D {
+        background-color: #333333;
+      }
+      #visButtons {
+        position: absolute;;
+        right: 10px;
+        top:10px;
+        z-index: 1000;
+      }
+
+	  #logo
+		{
+        position: absolute;
+        right: 10px;
+		height: 60px; 
+		border: solid 5px white;
+        top:10px;
+        z-index: 1000;
+}
 
 #basemapsDDL {
 border: none;
@@ -45,13 +64,10 @@ margin-left: 10px;
 margin-top: 2px;
 }
 
-#logo {
-height: 35px;
+.leaflet-draw-toolbar a {
+    background-image: url(images/spritesheet.png) !important;
 }
 
-.leaflet-top {
-top: 42px;
-}
 
 #toolsContainer {
 position: absolute;
@@ -84,13 +100,18 @@ margin-bottom: 5px !important;
       #twoControl {        
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
+		height: 30px;
       }
 
       #threeControl {
         border-top-right-radius: 4px;
         border-bottom-right-radius: 4px;
+		height: 30px;
       }
 
+	  #exampleModalLabel {
+		  float: left;
+	  }
 
       #infoButtons{
         position: absolute;;
@@ -110,8 +131,8 @@ margin-bottom: 5px !important;
 
       #basemaps-wrapper {
           position: absolute;
-          top: 45px;
-          right: 5px;
+          bottom: 40px;
+          left: 10px;
           z-index: 10;
           background: white;
           padding: 10px;
